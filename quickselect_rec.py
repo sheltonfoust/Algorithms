@@ -1,9 +1,4 @@
 from test import *
-# Average Case 
-# O(n) time
-# O(logn)? space?
-
-
 def quickselect_wrap(arr, k):
     return quickselect(arr, k, 0, len(arr) - 1)
 
