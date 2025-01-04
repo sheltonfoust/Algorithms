@@ -1,4 +1,4 @@
-from testsort import *
+from test import *
 
 
 def mergesort(arr):
@@ -30,4 +30,4 @@ def mergesort_rec(arr):
         r += 1
     return res
 
-print(testsort(mergesort, True))
+print(test_sort(mergesort, True))
