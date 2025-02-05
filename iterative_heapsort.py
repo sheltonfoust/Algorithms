@@ -1,5 +1,5 @@
 from test import *
-def shift_down(arr, end, parent): # end is exclusive
+def sift_down(arr, parent, end): # end is exclusive
     while True:
         left = 2 * parent + 1
         right = 2 * parent + 2
@@ -17,10 +17,10 @@ def shift_down(arr, end, parent): # end is exclusive
 
 def heapsort(arr):
     for i in range(len(arr) // 2 - 1, -1, -1):
-        shift_down(arr, len(arr), i)
+        sift_down(arr, i, len(arr))
 
     for i in range(len(arr) - 1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]
-        shift_down(arr, i, 0)
+        sift_down(arr, 0, i)
 
 print(test_sort(heapsort, True))
