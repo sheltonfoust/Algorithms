@@ -1,11 +1,10 @@
-from test import *
 def kmp(s, p):
     res = []
-    j = 1
+    j = 0
     lps = [0] * len(p)
     for i in range(1, len(p)):
-        while p[i] != p[j] and j > 0: 
-            j = lps[j-1]
+        while p[i] != p[j] and j > 0:
+            j = lps[j - 1]
             if p[i] == p[j]:
                 j += 1
                 lps[i] = j
@@ -15,17 +14,10 @@ def kmp(s, p):
             i += 1
             j += 1
             if j == len(p):
-                return (i - len(p))
-                # res.append(i - len(p))
-                # j = lps[j - 1]
+                res.append(i - len(p))
+                j = lps[j - 1]
         elif j == 0:
             i += 1
         else:
             j = lps[j - 1]
-        
     return res
-
-
-print("Output", kmp("dabaaadadadam", "ddddd"))
-print(test_pattern_matching(kmp, True))
-

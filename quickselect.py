@@ -1,12 +1,10 @@
 from test import *
 
 def quickselect(arr, k):
-    start = 0
-    end = len(arr) - 1
-    
+    start, end = 0, len(arr) - 1
+    if k < start or k > end:
+        return None
     while True:
-        if k > end:
-            return None
         l = start
         for r in range(start, end):
             if arr[r] < arr[end]:
