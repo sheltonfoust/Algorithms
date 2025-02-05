@@ -1,20 +1,21 @@
 from test import *
-
-def shift_down(arr, length, i):
+def shift_down(arr, end, parent): # end is exclusive
     while True:
-        largest = i
-        left = 2 * i + 1
-        right = 2 * i + 2
-        if left < length and arr[left] > arr[largest]:
+        left = 2 * parent + 1
+        right = 2 * parent + 2
+        
+        largest = parent
+        if left < end and arr[left] > arr[largest]:
             largest = left
-        if right < length and arr[right] > arr[largest]:
+        if right < end and arr[right] > arr[largest]:
             largest = right
-        if largest == i:
+        if largest == parent:
             break
-        arr[i], arr[largest] = arr[largest], arr[i]
-        i = largest
 
-def heap_sort(arr):      
+        arr[parent], arr[largest] = arr[largest], arr[parent]
+        parent = largest
+
+def heapsort(arr):
     for i in range(len(arr) // 2 - 1, -1, -1):
         shift_down(arr, len(arr), i)
 
@@ -22,4 +23,4 @@ def heap_sort(arr):
         arr[i], arr[0] = arr[0], arr[i]
         shift_down(arr, i, 0)
 
-print(test_sort(heap_sort, True))
+print(test_sort(heapsort, True))

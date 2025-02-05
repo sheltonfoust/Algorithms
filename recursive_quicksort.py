@@ -4,7 +4,7 @@ from test import *
 def quicksort_wrap(arr):
     quicksort(arr, 0, len(arr) - 1)
 
-def quicksort(arr, start, end):
+def quicksort(arr, start, end): # end is inclusive
     if start >= end:
         return
     l = start
