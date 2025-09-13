@@ -1,31 +1,37 @@
 from test import *
-def kmp(s, p):
-    res = []
-    j = 1
-    lps = [0] * len(p)
-    for i in range(1, len(p)):
-        while p[i] != p[j] and j > 0: 
-            j = lps[j-1]
-            if p[i] == p[j]:
-                j += 1
-                lps[i] = j
-    j, i = 0, 0
-    while i < len(s):
-        if s[i] == p[j]:
+
+def kmp(haystack, needle):
+    if needle == "": return 0
+    lps = [0] * len(needle)
+    prevLPS, i = 0, 1
+    while i < len(needle):
+        if needle[i] == needle[prevLPS]:
+            lps[i] = prevLPS + 1
+            prevLPS += 1
             i += 1
-            j += 1
-            if j == len(p):
-                return (i - len(p))
-                # res.append(i - len(p))
-                # j = lps[j - 1]
-        elif j == 0:
+        elif prevLPS == 0:
+
+            lps[i] = 0
             i += 1
         else:
-            j = lps[j - 1]
+            prevLPS = lps[prevLPS - 1]
+    
+    i = 0  # ptr for haystack
+    j = 0  # ptr for needle
+    while i < len(haystack):
+        if haystack[i] == needle[j]:
+            i, j = i + 1, j + 1
+        else:
+            if j == 0:
+                i += 1
+            else:
+                j = lps[j - 1]
         
-    return res
+        if j == len(needle):
+            return i - len(needle)
+        
+    return -1
+kmp("1111001101", "1101")
 
-
-print("Output", kmp("dabaaadadadam", "ddddd"))
 print(test_pattern_matching(kmp, True))
 

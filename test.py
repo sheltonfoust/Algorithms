@@ -51,6 +51,20 @@ def test_select(select_method, print_info = False):
             return False
     return True
 
+
+
+def brute_force_pattern(haystack, needle):
+        n, m = len(haystack), len(needle)
+        for i in range(n - m + 1):
+            j = 0
+            while j < m:
+                if haystack[i + j] != needle[j]:
+                    break
+                j += 1
+            if j == m:
+                return i
+        return -1
+
 def test_pattern_matching(matching_method, print_info = False):
     for foo in range(100):
         letters = ["0", "1"]
@@ -59,17 +73,16 @@ def test_pattern_matching(matching_method, print_info = False):
         p_length = random.randint(1, length // 2)
         p = "".join(random.choice(letters) for i in range(p_length))
 
-        
-        # matches = matching_method(s, p)
-        # if print_info:
-        #     print("s: ", s, "p: ", p)
-        #     print("matches: ", matches)
-        #     print("\n")
-        # matches = set(matches)
-        # for i in range(len(s)):
-        #     if (i not in matches) and s[i:].startswith(p):
-        #         return False
-        #     if (i in matches) and not s[i:].startswith(p):
-        #         return False
+        expected = matching_method(s, p)
+        if print_info:
+            print("s: ", s, "p: ", p)
+            print("expected match index: ", expected)
+            
+        actual = brute_force_pattern(s, p)
+        print("actual match index: ", actual)
+        print("\n")
+
+        if actual != expected:
+            return False
 
     return True
